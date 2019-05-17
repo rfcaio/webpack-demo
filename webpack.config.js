@@ -1,37 +1,30 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
-const webpack = require('webpack')
+const merge = require('webpack-merge')
 
-let devServer = {
-  host: process.env.HOST,
-  open: true,
-  overlay: true,
-  port: process.env.PORT,
-  stats: 'errors-only'
-}
+const parts = require('./webpack.parts')
 
-let plugins = [
-  new HtmlWebpackPlugin({
-    title: 'Webpack demo'
-  })
-]
-
-// https://survivejs.com/webpack/developing/webpack-dev-server/#polling-instead-of-watching-files
-if (process.env.MODE === 'poll') {
-  const watchIgnorePlugin = new webpack.WatchIgnorePlugin([
-    path.join(__dirname, 'node_modules')
-  ])
-
-  const watchOptions = {
-    aggregateTimeout: 5000,
-    poll: 1000
+let commonConfig = merge([
+  {
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Webpack demo'
+      })
+    ]
   }
+])
 
-  devServer = Object.assign({}, devServer, { watchOptions })
-  plugins = [...plugins, watchIgnorePlugin]
-}
+let developmentConfig = merge([
+  parts.devServer({
+    host: process.env.HOST,
+    port: process.env.PORT
+  })
+])
 
-module.exports = {
-  devServer,
-  plugins
+let productionConfig = merge([])
+
+module.exports = mode => {
+  if (mode === 'production') {
+    return merge(commonConfig, productionConfig, { mode })
+  }
+  return merge(commonConfig, developmentConfig, { mode })
 }

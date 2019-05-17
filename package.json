@@ -11,7 +11,8 @@
     "nodemon": "1.19.0",
     "webpack": "4.31.0",
     "webpack-cli": "3.3.2",
-    "webpack-dev-server": "3.3.1"
+    "webpack-dev-server": "3.3.1",
+    "webpack-merge": "4.2.1"
   },
   "homepage": "https://github.com/rfcaio/webpack-demo#readme",
   "license": "MIT",
@@ -22,9 +23,9 @@
     "url": "https://github.com/rfcaio/webpack-demo.git"
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack --devtool false --mode development",
-    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --mode development\""
+    "build": "webpack --env production",
+    "dev": "webpack --devtool false --env development",
+    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env development\""
   },
   "version": "1.0.0"
 }
