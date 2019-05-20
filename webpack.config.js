@@ -10,7 +10,8 @@ let commonConfig = merge([
         title: 'Webpack demo'
       })
     ]
-  }
+  },
+  parts.loadCss()
 ])
 
 let developmentConfig = merge([
