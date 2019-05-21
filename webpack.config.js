@@ -3,25 +3,27 @@ const merge = require('webpack-merge')
 
 const parts = require('./webpack.parts')
 
-let commonConfig = merge([
+const commonConfig = merge([
   {
     plugins: [
       new HtmlWebpackPlugin({
         title: 'Webpack demo'
       })
     ]
-  },
-  parts.loadCss()
+  }
 ])
 
-let developmentConfig = merge([
+const developmentConfig = merge([
   parts.devServer({
     host: process.env.HOST,
     port: process.env.PORT
-  })
+  }),
+  parts.loadCss()
 ])
 
-let productionConfig = merge([])
+const productionConfig = merge([
+  parts.extractCss({ use: 'css-loader' })
+])
 
 module.exports = mode => {
   if (mode === 'production') {
