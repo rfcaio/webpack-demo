@@ -1,4 +1,17 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const PurifyCSSPlugin = require('purifycss-webpack')
+
+exports.devServer = ({ host, port }) => {
+  return {
+    devServer: {
+      host,
+      open: true,
+      overlay: true,
+      port,
+      stats: 'errors-only'
+    }
+  }
+}
 
 exports.extractCss = ({ exclude, include, use = [] }) => {
   const plugin = new MiniCssExtractPlugin({
@@ -20,18 +33,6 @@ exports.extractCss = ({ exclude, include, use = [] }) => {
   }
 }
 
-exports.devServer = ({ host, port }) => {
-  return {
-    devServer: {
-      host,
-      open: true,
-      overlay: true,
-      port,
-      stats: 'errors-only'
-    }
-  }
-}
-
 exports.loadCss = ({ exclude, include } = {}) => {
   return {
     module: {
@@ -46,3 +47,7 @@ exports.loadCss = ({ exclude, include } = {}) => {
     }
   }
 }
+
+exports.purifyCSS = ({ paths }) => ({
+  plugins: [new PurifyCSSPlugin({ paths })]
+})

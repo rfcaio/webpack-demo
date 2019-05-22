@@ -1,3 +1,4 @@
+import 'purecss'
 
 import './main.css'
 
