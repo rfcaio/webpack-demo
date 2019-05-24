@@ -1,6 +1,15 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const PurifyCSSPlugin = require('purifycss-webpack')
 
+exports.autoprefix = () => {
+  return {
+    loader: 'postcss-loader',
+    options: {
+      plugins: () => [require('autoprefixer')()]
+    }
+  }
+}
+
 exports.devServer = ({ host, port }) => {
   return {
     devServer: {

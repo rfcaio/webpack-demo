@@ -28,7 +28,7 @@ const developmentConfig = merge([
 ])
 
 const productionConfig = merge([
-  parts.extractCss({ use: 'css-loader' }),
+  parts.extractCss({ use: ['css-loader', parts.autoprefix()] }),
   parts.purifyCSS({
     paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true })
   })

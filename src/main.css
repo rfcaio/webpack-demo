@@ -2,3 +2,7 @@
 body {
   background-color: cornsilk;
 }
+
+.pure-button {
+  display: flex;
+}
