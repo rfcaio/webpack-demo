@@ -57,6 +57,26 @@ exports.loadCss = ({ exclude, include } = {}) => {
   }
 }
 
+exports.loadImages = ({ exclude, include, options }) => {
+  return {
+    module: {
+      rules: [
+        {
+          exclude,
+          include,
+          test: /\.(jpg|png)$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
 exports.purifyCSS = ({ paths }) => ({
   plugins: [new PurifyCSSPlugin({ paths })]
 })

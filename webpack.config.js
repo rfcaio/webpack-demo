@@ -24,11 +24,18 @@ const developmentConfig = merge([
     host: process.env.HOST,
     port: process.env.PORT
   }),
-  parts.loadCss()
+  parts.loadCss(),
+  parts.loadImages({})
 ])
 
 const productionConfig = merge([
   parts.extractCss({ use: ['css-loader', parts.autoprefix()] }),
+  parts.loadImages({
+    options: {
+      limit: 15000,
+      name: '[name].[ext]'
+    }
+  }),
   parts.purifyCSS({
     paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true })
   })
