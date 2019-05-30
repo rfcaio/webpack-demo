@@ -16,7 +16,8 @@ const commonConfig = merge([
         title: 'Webpack demo'
       })
     ]
-  }
+  },
+  parts.loadJavaScript({ include: PATHS.app })
 ])
 
 const developmentConfig = merge([

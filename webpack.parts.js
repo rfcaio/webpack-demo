@@ -77,6 +77,21 @@ exports.loadImages = ({ exclude, include, options }) => {
   }
 }
 
+exports.loadJavaScript = ({ exclude, include }) => {
+  return {
+    module: {
+      rules: [
+        {
+          exclude,
+          include,
+          test: /\.js$/,
+          use: ['babel-loader']
+        }
+      ]
+    }
+  }
+}
+
 exports.purifyCSS = ({ paths }) => ({
   plugins: [new PurifyCSSPlugin({ paths })]
 })
