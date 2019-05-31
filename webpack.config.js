@@ -25,12 +25,14 @@ const developmentConfig = merge([
     host: process.env.HOST,
     port: process.env.PORT
   }),
+  parts.generateSourceMaps({ type: 'inline-source-map' }),
   parts.loadCss(),
   parts.loadImages({})
 ])
 
 const productionConfig = merge([
   parts.extractCss({ use: ['css-loader', parts.autoprefix()] }),
+  parts.generateSourceMaps({ type: 'source-map' }),
   parts.loadImages({
     options: {
       limit: 15000,

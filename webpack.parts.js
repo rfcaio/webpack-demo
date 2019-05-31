@@ -42,6 +42,12 @@ exports.extractCss = ({ exclude, include, use = [] }) => {
   }
 }
 
+exports.generateSourceMaps = ({ type }) => {
+  return {
+    devtool: type
+  }
+}
+
 exports.loadCss = ({ exclude, include } = {}) => {
   return {
     module: {
