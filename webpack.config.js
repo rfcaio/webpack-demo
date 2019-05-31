@@ -41,7 +41,20 @@ const productionConfig = merge([
   }),
   parts.purifyCSS({
     paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true })
-  })
+  }),
+  {
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            chunks: 'initial',
+            name: 'vendor',
+            test: /[\\/]node_modules[\\/]/
+          }
+        }
+      }
+    }
+  }
 ])
 
 module.exports = mode => {
