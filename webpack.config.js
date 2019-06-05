@@ -31,6 +31,8 @@ const developmentConfig = merge([
 ])
 
 const productionConfig = merge([
+  parts.attachRevision(),
+  parts.clean(),
   parts.extractCss({ use: ['css-loader', parts.autoprefix()] }),
   parts.generateSourceMaps({ type: 'source-map' }),
   parts.loadImages({

@@ -1,5 +1,16 @@
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const GitRevisionWebpackPlugin = require('git-revision-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const PurifyCSSPlugin = require('purifycss-webpack')
+const webpack = require('webpack')
+
+exports.attachRevision = () => ({
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: new GitRevisionWebpackPlugin().version()
+    })
+  ]
+})
 
 exports.autoprefix = () => {
   return {
@@ -9,6 +20,10 @@ exports.autoprefix = () => {
     }
   }
 }
+
+exports.clean = path => ({
+  plugins: [new CleanWebpackPlugin()]
+})
 
 exports.devServer = ({ host, port }) => {
   return {
