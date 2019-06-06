@@ -41,6 +41,15 @@ const productionConfig = merge([
       name: '[name].[ext]'
     }
   }),
+  parts.minifyCSS({
+    options: {
+      discardComments: {
+        removeAll: true
+      },
+      safe: true
+    }
+  }),
+  parts.minifyJavaScript(),
   parts.purifyCSS({
     paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true })
   }),

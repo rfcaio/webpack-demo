@@ -1,7 +1,10 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const cssnano = require('cssnano')
 const GitRevisionWebpackPlugin = require('git-revision-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const PurifyCSSPlugin = require('purifycss-webpack')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 
 exports.attachRevision = () => ({
@@ -109,6 +112,26 @@ exports.loadJavaScript = ({ exclude, include }) => {
           use: ['babel-loader']
         }
       ]
+    }
+  }
+}
+
+exports.minifyCSS = ({ options }) => {
+  return {
+    plugins: [
+      new OptimizeCSSAssetsWebpackPlugin({
+        cssProcessor: cssnano,
+        cssProcessorOptions: options,
+        canPrint: false
+      })
+    ]
+  }
+}
+
+exports.minifyJavaScript = () => {
+  return {
+    optimization: {
+      minimizer: [new TerserWebpackPlugin({ sourceMap: true })]
     }
   }
 }
