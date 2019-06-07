@@ -17,7 +17,8 @@ const commonConfig = merge([
       })
     ]
   },
-  parts.loadJavaScript({ include: PATHS.app })
+  parts.loadJavaScript({ include: PATHS.app }),
+  parts.setFreeVariable('MESSAGE', 'Don\'t make me laugh.')
 ])
 
 const developmentConfig = merge([

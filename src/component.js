@@ -1,5 +1,5 @@
 
-export default (text = 'Hello, world.') => {
+export default (text = MESSAGE) => {
   const element = document.createElement('div')
   element.className = 'pure-button'
   element.textContent = text
