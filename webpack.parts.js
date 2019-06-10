@@ -42,7 +42,7 @@ exports.devServer = ({ host, port }) => {
 
 exports.extractCss = ({ exclude, include, use = [] }) => {
   const plugin = new MiniCssExtractPlugin({
-    filename: '[name].css'
+    filename: '[name].[contenthash].css'
   })
 
   return {

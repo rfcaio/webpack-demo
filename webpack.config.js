@@ -32,6 +32,12 @@ const developmentConfig = merge([
 ])
 
 const productionConfig = merge([
+  {
+    output: {
+      chunkFilename: '[name].[chunkhash].js',
+      filename: '[name].[chunkhash].js'
+    }
+  },
   parts.attachRevision(),
   parts.clean(),
   parts.extractCss({ use: ['css-loader', parts.autoprefix()] }),
@@ -39,7 +45,7 @@ const productionConfig = merge([
   parts.loadImages({
     options: {
       limit: 15000,
-      name: '[name].[ext]'
+      name: '[name].[hash].[ext]'
     }
   }),
   parts.minifyCSS({
