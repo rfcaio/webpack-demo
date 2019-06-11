@@ -62,6 +62,9 @@ const productionConfig = merge([
   }),
   {
     optimization: {
+      runtimeChunk: {
+        name: 'manifest'
+      },
       splitChunks: {
         cacheGroups: {
           commons: {
