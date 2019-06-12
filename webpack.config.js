@@ -74,6 +74,11 @@ const productionConfig = merge([
           }
         }
       }
+    },
+    performance: {
+      hints: 'warning',
+      maxAssetSize: 460800,
+      maxEntrypointSize: 51200
     }
   }
 ])
